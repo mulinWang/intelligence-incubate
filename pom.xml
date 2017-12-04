@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.longyuan</groupId>
+    <artifactId>intelligence-incubate</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0.0-SNAPSHOT</version>
+
+    <build>
+        <pluginManagement>
+
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>2.4</version>
+                    <configuration>
+                        <source>1.8</source>
+                        <target>1.8</target>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>net.alchim31.maven</groupId>
+                    <artifactId>scala-maven-plugin</artifactId>
+                    <version>3.2.2</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-install-plugin</artifactId>
+                    <version>2.5.2</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-shade-plugin</artifactId>
+                    <version>3.1.0</version>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-jar-plugin</artifactId>
+                    <version>3.0.2</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <version>2.7</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+
+    <profiles>
+        <profile>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <id>dev</id>
+            <properties>
+                <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+                <!-- log 4j -->
+                <intelligence.s32cassandra.log4j.level>INFO</intelligence.s32cassandra.log4j.level>
+                <intelligence.s32cassandra.log4j.home>.</intelligence.s32cassandra.log4j.home>
+                <!--spark driver-->
+                <driver.master>local[*]</driver.master>
+                <driver.streaming.batchInterval>30000</driver.streaming.batchInterval>
+                <!--aws service-->
+                <aws.accessKey>AKIAO4RERNKGOMSUNZVA</aws.accessKey>
+                <aws.secretKey>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</aws.secretKey>
+                <aws.region></aws.region>
+                <aws.enpoint></aws.enpoint>
+                <!--aws s3-->
+                <aws.s3.bucket>csdatas3production</aws.s3.bucket>
+                <aws.s3.appId>bc4455c1f7a9c0f7</aws.s3.appId>
+                <aws.s3.endpoint>s3.cn-north-1.amazonaws.com.cn</aws.s3.endpoint>
+
+                <!--cassandra-->
+                <cassandra.host>52.80.0.158,52.80.113.55,52.80.150.172</cassandra.host>
+            </properties>
+        </profile>
+        <profile>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <id>test</id>
+            <properties>
+                <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+                <!-- log 4j -->
+                <hifive.data.etl.log4j.level>INFO</hifive.data.etl.log4j.level>
+                <hifive.data.etl.log.home>/mnt/disk1/spark/log</hifive.data.etl.log.home>
+                <!--spark-->
+                <spark.etl.loghub2es.main.application.name>hifive_test</spark.etl.loghub2es.main.application.name>
+                <spark.etl.loghub2es.main.master>yarn</spark.etl.loghub2es.main.master>
+                <spark.etl.loghub2es.main.streaming.batchInterval>30000</spark.etl.loghub2es.main.streaming.batchInterval>
+
+                <!--aliyun service-->
+                <aliyun.accessKeyId>LTAIG6dF1Ck76U8A</aliyun.accessKeyId>
+                <aliyun.accessKeySecret>3Z0SLyc76AXNVexUMt0PFFLGD6pfCy</aliyun.accessKeySecret>
+                <!--aliyun loghub-->
+                <aliyun.loghub.endpoint>cn-shanghai-vpc.log.aliyuncs.com</aliyun.loghub.endpoint>
+                <aliyun.loghub.groupName>emr_es_hifive_test_v2_1</aliyun.loghub.groupName>
+                <aliyun.logService.project>hifive</aliyun.logService.project>
+                <aliyun.logStore.name>music_infos</aliyun.logStore.name>
+
+                <aliyun.logService.num.receivers>3</aliyun.logService.num.receivers>
+                <aliyun.logService.fetch.interval.millis>10000</aliyun.logService.fetch.interval.millis>
+                <aliyun.logService.cursor.start.time>2017-11-15 00:00:00</aliyun.logService.cursor.start.time>
+                <!--elasticsearch-->
+                <elasticsearch.cluster-name>hifive</elasticsearch.cluster-name>
+                <elasticsearch.nodes>106.14.197.208</elasticsearch.nodes>
+                <elasticsearch.port>9200</elasticsearch.port>
+                <elasticsearch.username>elastic</elasticsearch.username>
+                <elasticsearch.password>changeme</elasticsearch.password>
+            </properties>
+        </profile>
+        <profile>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <id>production</id>
+            <properties>
+                <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+                <!-- log 4j -->
+                <hifive.data.etl.log4j.level>INFO</hifive.data.etl.log4j.level>
+                <hifive.data.etl.log.home>/mnt/disk1/spark/log</hifive.data.etl.log.home>
+
+                <spark.etl.loghub2es.main.application.name>hifive_main</spark.etl.loghub2es.main.application.name>
+                <spark.etl.loghub2es.main.master>yarn</spark.etl.loghub2es.main.master>
+                <spark.etl.loghub2es.main.streaming.batchInterval>30000</spark.etl.loghub2es.main.streaming.batchInterval>
+                <!--aliyun service-->
+                <aliyun.accessKeyId>LTAIG6dF1Ck76U8A</aliyun.accessKeyId>
+                <aliyun.accessKeySecret>3Z0SLyc76AXNVexUMt0PFFLGD6pfCy</aliyun.accessKeySecret>
+                <!--aliyun loghub-->
+                <aliyun.loghub.endpoint>cn-shanghai-vpc.log.aliyuncs.com</aliyun.loghub.endpoint>
+                <aliyun.loghub.groupName>emr_es_hifive</aliyun.loghub.groupName>
+                <aliyun.logService.project>hifive</aliyun.logService.project>
+                <aliyun.logStore.name>music_info_analysis</aliyun.logStore.name>
+
+                <aliyun.logService.num.receivers>3</aliyun.logService.num.receivers>
+                <aliyun.logService.fetch.interval.millis>5000</aliyun.logService.fetch.interval.millis>
+                <aliyun.logService.cursor.start.time>2017-11-29 00:00:00</aliyun.logService.cursor.start.time>
+
+                <!--elasticsearch-->
+                <elasticsearch.cluster-name>es-cluster</elasticsearch.cluster-name>
+                <elasticsearch.nodes>192.168.30.76,192.168.30.77,192.168.30.78</elasticsearch.nodes>
+                <elasticsearch.port>9200</elasticsearch.port>
+                <elasticsearch.username></elasticsearch.username>
+                <elasticsearch.password></elasticsearch.password>
+            </properties>
+        </profile>
+
+    </profiles>
+    <modules>
+        <module>intelligence-incubate-s32cassandra</module>
+    </modules>
+
+    <dependencyManagement>
+        <!--项目依赖jar包，可从此处获取你需要的jar包的信息 http://mvnrepository.com/-->
+        <dependencies>
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>4.12</version>
+            </dependency>
+
+            <!-- json -->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>1.2.37</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.codehaus.jackson</groupId>
+                <artifactId>jackson-mapper-asl</artifactId>
+                <version>1.9.13</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-core</artifactId>
+                <version>2.9.1</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-annotations</artifactId>
+                <version>2.9.1</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.dataformat</groupId>
+                <artifactId>jackson-dataformat-yaml</artifactId>
+                <version>2.9.1</version>
+            </dependency>
+
+            <!--log-->
+            <dependency>
+                <groupId>com.typesafe.scala-logging</groupId>
+                <artifactId>scala-logging-slf4j_2.11</artifactId>
+                <version>2.1.2</version>
+            </dependency>
+            <dependency>
+                <groupId>com.typesafe.scala-logging</groupId>
+                <artifactId>scala-logging_2.11</artifactId>
+                <version>3.5.0</version>
+            </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>1.7.21</version>
+            </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-log4j12</artifactId>
+                <version>1.7.21</version>
+            </dependency>
+
+            <!--spark-->
+            <dependency>
+                <groupId>org.apache.spark</groupId>
+                <artifactId>spark-core_2.11</artifactId>
+                <version>2.2.0</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.spark</groupId>
+                <artifactId>spark-streaming_2.11</artifactId>
+                <version>2.2.0</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.spark</groupId>
+                <artifactId>spark-sql_2.11</artifactId>
+                <version>2.2.0</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.spark</groupId>
+                <artifactId>spark-mllib_2.11</artifactId>
+                <version>2.2.0</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.hadoop</groupId>
+                <artifactId>hadoop-common</artifactId>
+                <version>2.9.0</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.hadoop</groupId>
+                <artifactId>hadoop-mapreduce-client-core</artifactId>
+                <version>2.9.0</version>
+            </dependency>
+
+            <!--aws-->
+            <dependency>
+                <groupId>com.amazonaws</groupId>
+                <artifactId>aws-java-sdk-core</artifactId>
+                <version>1.11.60</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.amazonaws</groupId>
+                <artifactId>aws-java-sdk-s3</artifactId>
+                <version>1.11.60</version>
+            </dependency>
+
+            <!-- https://mvnrepository.com/artifact/org.apache.hadoop/hadoop-aws -->
+            <dependency>
+                <groupId>org.apache.hadoop</groupId>
+                <artifactId>hadoop-aws</artifactId>
+                <version>2.9.0</version>
+            </dependency>
+
+            <!--json-->
+            <dependency>
+                <groupId>org.json4s</groupId>
+                <artifactId>json4s-native_2.11</artifactId>
+                <version>3.5.3</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.json4s</groupId>
+                <artifactId>json4s-jackson_2.11</artifactId>
+                <version>3.5.3</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>1.2.37</version>
+            </dependency>
+
+            <!--cassandra-->
+            <dependency>
+                <groupId>com.datastax.spark</groupId>
+                <artifactId>spark-cassandra-connector_2.11</artifactId>
+                <version>2.0.5</version>
+            </dependency>
+            <dependency>
+                <groupId>com.datastax.cassandra</groupId>
+                <artifactId>cassandra-driver-core</artifactId>
+                <version>3.1.4</version>
+            </dependency>
+
+            <!--scala-->
+            <dependency>
+                <groupId>org.scala-lang</groupId>
+                <artifactId>scala-library</artifactId>
+                <version>2.11.8</version>
+            </dependency>
+            <dependency>
+                <groupId>org.scala-lang.modules</groupId>
+                <artifactId>scala-xml_2.11</artifactId>
+                <version>1.0.6</version>
+            </dependency>
+            <dependency>
+                <groupId>org.scala-lang</groupId>
+                <artifactId>scalap</artifactId>
+                <version>2.11.8</version>
+            </dependency>
+            <dependency>
+                <groupId>org.scala-lang</groupId>
+                <artifactId>scala-compiler</artifactId>
+                <version>2.11.8</version>
+            </dependency>
+            <dependency>
+                <groupId>org.scalatest</groupId>
+                <artifactId>scalatest_2.11</artifactId>
+                <version>3.0.1</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+</project>
