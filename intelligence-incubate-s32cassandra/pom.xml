@@ -11,7 +11,6 @@
 
     <artifactId>intelligence-incubate-s32cassandra</artifactId>
 
-
     <build>
         <resources>
             <resource>
@@ -51,6 +50,15 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                    <excludes>
+                        <exclude>org.apache.spark:*</exclude>
+                        <exclude>org.apache.hadoop:*</exclude>
+                        <exclude>com.amazonaws:*</exclude>
+                        <exclude>com.datastax:*</exclude>
+                        <exclude>org.scala-lang:*</exclude>
+                    </excludes>
+                </configuration>
             </plugin>
         </plugins>
     </build>
@@ -101,9 +109,11 @@
             <groupId>com.datastax.spark</groupId>
             <artifactId>spark-cassandra-connector_2.11</artifactId>
         </dependency>
+
+        <!--presto-->
         <dependency>
-            <groupId>com.datastax.cassandra</groupId>
-            <artifactId>cassandra-driver-core</artifactId>
+            <groupId>com.facebook.presto</groupId>
+            <artifactId>presto-jdbc</artifactId>
         </dependency>
 
         <!--scala-->
@@ -130,10 +140,10 @@
             <scope>test</scope>
         </dependency>
 
-        <dependency>
-            <groupId>org.scalatest</groupId>
-            <artifactId>scalatest_2.11</artifactId>
-            <scope>test</scope>
-        </dependency>
-    </dependencies>
+    <dependency>
+        <groupId>org.scalatest</groupId>
+        <artifactId>scalatest_2.11</artifactId>
+        <scope>test</scope>
+    </dependency>
+</dependencies>
 </project>

@@ -77,7 +77,7 @@
                 <aws.s3.endpoint>s3.cn-north-1.amazonaws.com.cn</aws.s3.endpoint>
 
                 <!--cassandra-->
-                <cassandra.host>52.80.0.158,52.80.113.55,52.80.150.172</cassandra.host>
+                <cassandra.host>172.16.249.39</cassandra.host>
             </properties>
         </profile>
         <profile>
@@ -88,31 +88,23 @@
             <properties>
                 <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
                 <!-- log 4j -->
-                <hifive.data.etl.log4j.level>INFO</hifive.data.etl.log4j.level>
-                <hifive.data.etl.log.home>/mnt/disk1/spark/log</hifive.data.etl.log.home>
-                <!--spark-->
-                <spark.etl.loghub2es.main.application.name>hifive_test</spark.etl.loghub2es.main.application.name>
-                <spark.etl.loghub2es.main.master>yarn</spark.etl.loghub2es.main.master>
-                <spark.etl.loghub2es.main.streaming.batchInterval>30000</spark.etl.loghub2es.main.streaming.batchInterval>
+                <intelligence.s32cassandra.log4j.level>INFO</intelligence.s32cassandra.log4j.level>
+                <intelligence.s32cassandra.log4j.home>/home/hadoop/data/project/s32cassandra</intelligence.s32cassandra.log4j.home>
+                <!--spark driver-->
+                <driver.master></driver.master>
+                <driver.streaming.batchInterval>30000</driver.streaming.batchInterval>
+                <!--aws service-->
+                <aws.accessKey>AKIAO4RERNKGOMSUNZVA</aws.accessKey>
+                <aws.secretKey>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</aws.secretKey>
+                <aws.region></aws.region>
+                <aws.enpoint></aws.enpoint>
+                <!--aws s3-->
+                <aws.s3.bucket>csdatas3production</aws.s3.bucket>
+                <aws.s3.appId>bc4455c1f7a9c0f7</aws.s3.appId>
+                <aws.s3.endpoint>s3.cn-north-1.amazonaws.com.cn</aws.s3.endpoint>
 
-                <!--aliyun service-->
-                <aliyun.accessKeyId>LTAIG6dF1Ck76U8A</aliyun.accessKeyId>
-                <aliyun.accessKeySecret>3Z0SLyc76AXNVexUMt0PFFLGD6pfCy</aliyun.accessKeySecret>
-                <!--aliyun loghub-->
-                <aliyun.loghub.endpoint>cn-shanghai-vpc.log.aliyuncs.com</aliyun.loghub.endpoint>
-                <aliyun.loghub.groupName>emr_es_hifive_test_v2_1</aliyun.loghub.groupName>
-                <aliyun.logService.project>hifive</aliyun.logService.project>
-                <aliyun.logStore.name>music_infos</aliyun.logStore.name>
-
-                <aliyun.logService.num.receivers>3</aliyun.logService.num.receivers>
-                <aliyun.logService.fetch.interval.millis>10000</aliyun.logService.fetch.interval.millis>
-                <aliyun.logService.cursor.start.time>2017-11-15 00:00:00</aliyun.logService.cursor.start.time>
-                <!--elasticsearch-->
-                <elasticsearch.cluster-name>hifive</elasticsearch.cluster-name>
-                <elasticsearch.nodes>106.14.197.208</elasticsearch.nodes>
-                <elasticsearch.port>9200</elasticsearch.port>
-                <elasticsearch.username>elastic</elasticsearch.username>
-                <elasticsearch.password>changeme</elasticsearch.password>
+                <!--cassandra 这里只需要填一个地址，cassandra java api会自动寻找集群其他节点-->
+                <cassandra.host>172.31.12.184</cassandra.host>
             </properties>
         </profile>
         <profile>
@@ -123,31 +115,23 @@
             <properties>
                 <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
                 <!-- log 4j -->
-                <hifive.data.etl.log4j.level>INFO</hifive.data.etl.log4j.level>
-                <hifive.data.etl.log.home>/mnt/disk1/spark/log</hifive.data.etl.log.home>
+                <intelligence.s32cassandra.log4j.level>INFO</intelligence.s32cassandra.log4j.level>
+                <intelligence.s32cassandra.log4j.home>/home/hadoop/data/project/s32cassandra</intelligence.s32cassandra.log4j.home>
+                <!--spark driver-->
+                <driver.master></driver.master>
+                <driver.streaming.batchInterval>30000</driver.streaming.batchInterval>
+                <!--aws service-->
+                <aws.accessKey>AKIAO4RERNKGOMSUNZVA</aws.accessKey>
+                <aws.secretKey>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</aws.secretKey>
+                <aws.region></aws.region>
+                <aws.enpoint></aws.enpoint>
+                <!--aws s3-->
+                <aws.s3.bucket>csdatas3production</aws.s3.bucket>
+                <aws.s3.appId>bc4455c1f7a9c0f7</aws.s3.appId>
+                <aws.s3.endpoint>s3.cn-north-1.amazonaws.com.cn</aws.s3.endpoint>
 
-                <spark.etl.loghub2es.main.application.name>hifive_main</spark.etl.loghub2es.main.application.name>
-                <spark.etl.loghub2es.main.master>yarn</spark.etl.loghub2es.main.master>
-                <spark.etl.loghub2es.main.streaming.batchInterval>30000</spark.etl.loghub2es.main.streaming.batchInterval>
-                <!--aliyun service-->
-                <aliyun.accessKeyId>LTAIG6dF1Ck76U8A</aliyun.accessKeyId>
-                <aliyun.accessKeySecret>3Z0SLyc76AXNVexUMt0PFFLGD6pfCy</aliyun.accessKeySecret>
-                <!--aliyun loghub-->
-                <aliyun.loghub.endpoint>cn-shanghai-vpc.log.aliyuncs.com</aliyun.loghub.endpoint>
-                <aliyun.loghub.groupName>emr_es_hifive</aliyun.loghub.groupName>
-                <aliyun.logService.project>hifive</aliyun.logService.project>
-                <aliyun.logStore.name>music_info_analysis</aliyun.logStore.name>
-
-                <aliyun.logService.num.receivers>3</aliyun.logService.num.receivers>
-                <aliyun.logService.fetch.interval.millis>5000</aliyun.logService.fetch.interval.millis>
-                <aliyun.logService.cursor.start.time>2017-11-29 00:00:00</aliyun.logService.cursor.start.time>
-
-                <!--elasticsearch-->
-                <elasticsearch.cluster-name>es-cluster</elasticsearch.cluster-name>
-                <elasticsearch.nodes>192.168.30.76,192.168.30.77,192.168.30.78</elasticsearch.nodes>
-                <elasticsearch.port>9200</elasticsearch.port>
-                <elasticsearch.username></elasticsearch.username>
-                <elasticsearch.password></elasticsearch.password>
+                <!--cassandra 这里只需要填一个地址，cassandra java api会自动寻找集群其他节点-->
+                <cassandra.host>172.31.12.184</cassandra.host>
             </properties>
         </profile>
 
@@ -162,7 +146,7 @@
             <dependency>
                 <groupId>junit</groupId>
                 <artifactId>junit</artifactId>
-                <version>4.12</version>
+                    <version>4.12</version>
             </dependency>
 
             <!-- json -->
@@ -220,25 +204,25 @@
             <dependency>
                 <groupId>org.apache.spark</groupId>
                 <artifactId>spark-core_2.11</artifactId>
-                <version>2.2.0</version>
+                <version>2.1.2</version>
             </dependency>
 
             <dependency>
                 <groupId>org.apache.spark</groupId>
                 <artifactId>spark-streaming_2.11</artifactId>
-                <version>2.2.0</version>
+                <version>2.1.2</version>
             </dependency>
 
             <dependency>
                 <groupId>org.apache.spark</groupId>
                 <artifactId>spark-sql_2.11</artifactId>
-                <version>2.2.0</version>
+                <version>2.1.2</version>
             </dependency>
 
             <dependency>
                 <groupId>org.apache.spark</groupId>
                 <artifactId>spark-mllib_2.11</artifactId>
-                <version>2.2.0</version>
+                <version>2.1.2</version>
             </dependency>
 
             <dependency>
@@ -298,10 +282,11 @@
                 <artifactId>spark-cassandra-connector_2.11</artifactId>
                 <version>2.0.5</version>
             </dependency>
+            <!--presto-->
             <dependency>
-                <groupId>com.datastax.cassandra</groupId>
-                <artifactId>cassandra-driver-core</artifactId>
-                <version>3.1.4</version>
+                <groupId>com.facebook.presto</groupId>
+                <artifactId>presto-jdbc</artifactId>
+                <version>0.189</version>
             </dependency>
 
             <!--scala-->
